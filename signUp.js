@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import ColorsFormat from './colorFormat';
 import {
   Profile,
@@ -19,13 +19,24 @@ import {
   Alert,
 } from 'react-native';
 const SignUp = () => {
-  const handleSignUp = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [isVisible1, setIsVisible1] = useState(true);
+  const [isVisible2, setIsVisible2] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [tick, setTick] = useState(false);
+
+  const [name, setName] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSignUp = useCallback(() => {
     if (!name || !emailError || !password || !confirmPassword) {
       Alert.alert('Please fill out all fields.');
     } else if (
       !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailError)
     ) {
-      Alert.alert(`Email is not valid`);
+      Alert.alert('Email is not valid');
     } else if (
       !/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/.test(
         password,
@@ -41,19 +52,7 @@ const SignUp = () => {
     } else {
       setShowModal(true);
     }
-  };
-
-  const [isChecked, setIsChecked] = useState(false);
-  const [isVisible1, setIsVisible1] = useState(true);
-  const [isVisible2, setIsVisible2] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [tick, setTick] = useState(false);
-
-  const [name, setName] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
+  }, [name, emailError, password, confirmPassword, tick]);
   return (
     <View style={styles.container}>
       <Text style={styles.signUp}>SignUp</Text>
@@ -208,7 +207,8 @@ const styles = StyleSheet.create({
   checkBox: {
     flex: 1,
     flexDirection: 'row',
-    marginHorizontal: 74,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 20,
   },
   Signups: {
@@ -229,21 +229,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
   },
   modalTxt: {
     backgroundColor: ColorsFormat.white,
     padding: 40,
     borderRadius: 20,
-    shadowColor: 'black',
-    elevation: 20,
   },
   modalbtn: {
     borderRadius: 10,
@@ -253,7 +243,7 @@ const styles = StyleSheet.create({
   },
   agremment: {
     lineHeight: 20,
-    fontSize: 12,
+    fontSize: 13,
     color: ColorsFormat.white,
   },
 });
