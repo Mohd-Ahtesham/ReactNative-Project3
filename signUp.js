@@ -23,7 +23,6 @@ const SignUp = () => {
   const [isVisible1, setIsVisible1] = useState(true);
   const [isVisible2, setIsVisible2] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [tick, setTick] = useState(false);
 
   const [name, setName] = useState('');
   const [emailError, setEmailError] = useState('');
