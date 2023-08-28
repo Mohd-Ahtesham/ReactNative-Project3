@@ -30,7 +30,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = () => {
+  const handleSignUp = useCallback(() => {
     if (!name || !emailError || !password || !confirmPassword) {
       Alert.alert('Please fill out all fields.');
     } else if (
@@ -52,7 +52,7 @@ const SignUp = () => {
     } else {
       setShowModal(true);
     }
-  };
+  }, [confirmPassword, emailError, name, password, tick]);
   return (
     <View style={styles.container}>
       <Text style={styles.signUp}>SignUp</Text>
