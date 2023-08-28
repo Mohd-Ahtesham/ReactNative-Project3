@@ -30,7 +30,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = useCallback(() => {
+  const handleSignUp = () => {
     if (!name || !emailError || !password || !confirmPassword) {
       Alert.alert('Please fill out all fields.');
     } else if (
@@ -52,7 +52,7 @@ const SignUp = () => {
     } else {
       setShowModal(true);
     }
-  }, [name, emailError, password, confirmPassword, tick]);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.signUp}>SignUp</Text>
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   textInput: {
+    padding: 5,
     paddingLeft: 20,
     width: '90%',
   },
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
   orText: {
     textAlign: 'center',
     color: ColorsFormat.white,
-    fontWeight: 400,
+    fontWeight: '400',
     marginTop: 20,
   },
   modal: {
